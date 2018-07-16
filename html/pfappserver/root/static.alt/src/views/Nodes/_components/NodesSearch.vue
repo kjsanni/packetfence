@@ -541,6 +541,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('nodes cleared')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -558,6 +559,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('nodes registered')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -575,6 +577,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('nodes unregistered')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -592,6 +595,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('nodes reevaluated')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -609,6 +613,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('node switch ports restarted')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -626,6 +631,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('node profiling refreshed')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
@@ -647,6 +653,11 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, variant: 'danger'})
           })
         })
+        if (role.category_id) {
+          this.$store.dispatch('notification/info', {message: macs.length + ' ' + this.$i18n.t('nodes assigned role') + ' ' + this.roles.filter(r => r.category_id === role.category_id).map(r => r.name)})
+        } else {
+          this.$store.dispatch('notification/info', {message: macs.length + ' ' + this.$i18n.t('nodes unassigned role')})
+        }
       }
     },
     applyBulkBypassRole (role) {
@@ -662,6 +673,11 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, variant: 'danger'})
           })
         })
+        if (role.category_id) {
+          this.$store.dispatch('notification/info', {message: macs.length + ' ' + this.$i18n.t('nodes assigned bypass role') + ' ' + this.roles.filter(r => r.category_id === role.category_id).map(r => r.name)})
+        } else {
+          this.$store.dispatch('notification/info', {message: macs.length + ' ' + this.$i18n.t('nodes unassigned bypass role')})
+        }
       }
     },
     applyBulkViolation (violation) {
@@ -673,6 +689,7 @@ export default {
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_VARIANT`, {index: index, status: item.status})
             _this.$store.commit(`${_this.$options.storeName}_searchable/ROW_MESSAGE`, {index: index, message: item.message})
           })
+          _this.$store.dispatch('notification/info', {message: response.items.length + ' ' + _this.$i18n.t('node violations created')})
         }).catch(() => {
           macs.forEach(function (mac, i) {
             let index = _this.tableValues.findIndex(node => node.mac === mac)
